@@ -44,6 +44,7 @@ public class ReservationController {
 
         // Récupérer les réservations de l'utilisateur
         model.addAttribute("listReservations", reservationService.getReservationsByUserId(userId));
+        model.addAttribute("loggedInUser", user);
         return "reservations"; // Vue Thymeleaf pour afficher les réservations
     }
 

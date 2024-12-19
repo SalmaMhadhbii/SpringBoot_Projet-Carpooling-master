@@ -40,13 +40,13 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .container {
+    /*.container {
       margin-top: 20px;
       background: white;
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
+    }*/
 
     h1 {
       font-size: 2.5rem;
@@ -183,41 +183,9 @@
   </style>
 </head>
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <!-- Logo RideWave aligné à gauche avec style -->
-    <a class="navbar-brand" href="/" style="font-weight: bold; color: #00aaff; font-size: 1.5rem; padding-left: 150px">RideWave</a>
+<!-- Inclure la Navbar -->
+<div th:replace="~{fragments :: header}"></div>
 
-    <!-- Bouton pour collapse sur mobile -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Liens alignés à droite -->
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/searchRides}" style="color: #000; font-weight: 500;">Search Ride</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/showNewRidesForm}" style="color: #000; font-weight: 500;">Publish Ride</a>
-        </li>
-        <!-- Dropdown pour le profil -->
-        <li class="nav-item dropdown" style="padding-right: 150px">
-          <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-            <li><a class="dropdown-item" th:href="@{/profile}"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
 
 
 <div class="container">

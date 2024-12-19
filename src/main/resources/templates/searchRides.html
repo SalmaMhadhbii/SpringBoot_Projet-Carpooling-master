@@ -18,6 +18,11 @@
             margin: 0;
         }
 
+        h1 {
+            margin-bottom: 40px; /* Ajoute de l'espace sous le titre */
+
+        }
+
         .card {
             border: 1px solid #add8e6;
         }
@@ -160,55 +165,8 @@
 <body>
 
 <!-- Inclure la Navbar -->
-<header th:fragment="header">
-    <nav class="navbar navbar-expand-lg ">
-        <div class="container">
-            <a class="navbar-brand" href="/"> RideWave</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{searchRides}" th:text="'Search Ride'"><i class="fas fa-search icon"></i> Search Ride</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" th:href="@{showNewRidesForm}" th:text="'Publish Ride'"><i class="fas fa-plus icon"></i> Publish Ride</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle"></i> <!-- Icône d'utilisateur -->
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+<div th:replace="~{fragments :: header}"></div>
 
-                            <!-- Si l'utilisateur n'est pas connecté -->
-                            <li class="nav-item" th:if="${loggedInUser == null}">
-                                <a class="nav-link" th:href="@{loginn}" th:text="'Log In'"><i class="fas fa-sign-in-alt"></i> Log In</a>
-                            </li>
-                            <li class="nav-item" th:if="${loggedInUser == null}">
-                                <a class="nav-link" th:href="@{register}" th:text="'Register'"><i class="fas fa-user-plus"></i> Register</a>
-                            </li>
-
-                            <!-- Si l'utilisateur est connecté -->
-                            <li class="nav-item" th:if="${loggedInUser != null}">
-                                <a class="nav-link" th:href="@{logout}" th:text="'Logout'"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                            </li>
-                            <li class="nav-item" th:if="${loggedInUser != null}">
-                                <a class="nav-link" th:href="@{Profile}" th:text="'Profile'">Profile</a>
-                            </li>
-                            <li class="nav-item" th:if="${loggedInUser != null}">
-                                <a class="nav-link" th:href="@{myRides}" th:text="'MyRides'"><i class="fas fa-sign-out-alt"></i> My rides</a>
-                            </li>
-
-
-                        </ul>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
 
 <div class="container mt-4">
     <h1 class="text-center">Where do you want to go?</h1>
@@ -294,6 +252,12 @@
                                     th:attr="data-ride-id=${ride.id}, data-available-seats=${ride.availableSeats}">
                                 Reserve a ride
                             </button>
+                            <a th:href="@{/rideDetails/{id}(id=${ride.id})}" style="background-color: #4682b4" class="btn btn-success btn-sm">Voir les détails</a>
+
+
+
+
+
                         </div>
                     </div>
                 </div>
