@@ -35,23 +35,6 @@ public class RideController {
 
 
 
-
-
-    /*@GetMapping("/showNewRidesForm")
-    public String showNewRidesForm(Model model, HttpSession session){
-        // Vérifier si l'utilisateur est connecté
-        if (session.getAttribute("loggedInUserId") == null) {
-            // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-            return "redirect:/loginn";
-        }
-        //create model attribute to bind form data
-        //creation dun new ride:
-        Ride ride = new Ride();
-        model.addAttribute("ride", ride);
-        //Thymleaf template will access the empty ride object for binding form data
-        return "addRideForm";
-    }*/
-
     @GetMapping("/showNewRidesForm")
     public String showNewRidesForm(Model model,HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -79,21 +62,7 @@ public class RideController {
     }
 
 
-    //seperate method for handling pagination
-    /*@GetMapping("/page/{pageNo}")
-    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
-        //fixing the pageSize:
-        int pageSize = 6;
 
-        //Récupérer les trajets paginés
-        Page<Ride> page = rideService.findPaginated(pageNo,pageSize);
-        List<Ride> userRides = page.getContent();
-        model.addAttribute("currentPage",pageNo);
-        model.addAttribute("totalPages",page.getTotalPages());
-        model.addAttribute("totalItems",page.getTotalElements());
-        model.addAttribute("userRides", userRides);
-        return "myRides";
-    }*/
 
 
 
@@ -118,44 +87,6 @@ public class RideController {
         return "myRides";
 
     }
-
-
-
-
-    // Save a new ride
-    /*@PostMapping("/saveRide")
-    public String saveRide(@ModelAttribute("ride") Ride ride,HttpSession session) {
-        // Vérifier si l'utilisateur est connecté
-        Long loggedInUserId = (Long) session.getAttribute("loggedInUserId"); // Assurez-vous que l'ID de l'utilisateur est stocké dans la session
-        if (loggedInUserId != null) {
-            // Trouver l'utilisateur dans la base de données par ID
-            User driver = userRepository.findById(loggedInUserId).orElseThrow(() -> new RuntimeException("User not found"));
-
-            // Associer l'utilisateur comme conducteur du trajet
-            ride.setDriver(driver); // L'attribut "driver" est de type User, donc on lui assigne l'objet "User"
-        } else {
-            // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
-            return "redirect:/login"; // Assurez-vous que vous avez une page de connexion
-        }
-        rideService.saveRide(ride);
-        return "redirect:/searchRides"; // Redirect to search page after saving
-    }*/
-
-    /*@PostMapping("/publishRide")
-    public String publishRide(@ModelAttribute Ride ride, HttpSession session) {
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
-        if (loggedInUser == null) {
-            return "redirect:/loginn";
-        }
-
-        // Associez le trajet à l'utilisateur connecté
-        ride.setDriver(loggedInUser);
-        rideService.saveRide(ride);
-
-        return "redirect:/myRides"; // Redirige vers une page affichant les trajets de l'utilisateur
-    }*/
-
-
 
     @GetMapping("/searchRides")
     public String searchRides(
@@ -237,11 +168,7 @@ public class RideController {
         return "searchRides";  // Return the view for displaying search results
     }
 
-    @PostMapping("/deleteRide")
-    public String deleteReservation(@RequestParam("id") Long id) {
-        rideService.deleteRide(id);
-        return "redirect:/myRides";
-    }
+
 
     @GetMapping("/rideDetails/{id}")
     public String showRideDetails(@PathVariable("id") Long rideId, Model model,HttpSession session) {
